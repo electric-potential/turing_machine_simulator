@@ -1,0 +1,60 @@
+state template:
+	state: name of state (no spaces)
+	accept 0 is do not halt, 1 is accept, 2 is reject
+	start: 0 if state is not start state, 1 if state is start state	
+
+delta template:
+	state: name of state (no spaces)
+	read: single character being read from tape
+	write: single character being written to tape
+	move: 0 for left, 1 for right
+	new state: name of state to transition to
+
+for example, the following turing machine will reject any 
+input string that isnt solely 1's and 0's, but it will 
+convert each 0 to an a, and each 1 to a b, then accept 
+when it hits the end of the string. 
+
+[
+	state: accept
+	accept: 1
+	start: 0
+]
+
+[
+	state: reject
+	accept: 2
+	start: 0
+]
+
+[
+	state: start
+	accept: 0
+	start: 1
+]
+
+----- state declarations above, delta functions below -----
+
+{
+	state: start
+	read:  
+	write:  
+	move: 1
+	new state: accept
+}
+
+{
+	state: start
+	read: 0
+	write: a
+	move: 1
+	new state: start
+}
+
+{
+	state: start
+	read: 1
+	write: b
+	move: 1
+	new state: start
+}
